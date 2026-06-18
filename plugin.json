@@ -1,0 +1,18 @@
+{
+    "id": "nordly-sso",
+    "name": "Nordly SSO Login",
+    "author": "Nordly",
+    "version": "1.0.0",
+    "description": "Makes the customer (app) panel login Authentik-only by hiding the native username/password form, leaving just the SSO button. The native login stays reachable at /login?local=1 for admin break-glass. Admin and server panels are untouched.",
+    "category": "plugin",
+    "url": "https://github.com/nordlyhost/pelican-nordly-sso",
+    "namespace": "Nordly\\SsoLogin",
+    "class": "NordlySsoPlugin",
+    "panels": null,
+    "panel_version": null,
+    "composer_packages": {},
+    "meta": {
+        "status": "enabled",
+        "status_message": null
+    }
+}
