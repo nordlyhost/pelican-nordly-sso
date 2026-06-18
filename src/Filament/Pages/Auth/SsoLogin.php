@@ -28,8 +28,10 @@ class SsoLogin extends PelicanLogin
             return parent::form($schema);
         }
 
+        // SSO-only: render the OAuth button full-width so it reads as the primary
+        // (and only) action, rather than a small left-aligned button.
         return $schema->components([
-            $this->getOAuthFormComponent(),
+            $this->getOAuthFormComponent()->fullWidth(),
         ]);
     }
 
