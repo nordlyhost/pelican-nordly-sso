@@ -2,6 +2,7 @@
 
 namespace Nordly\SsoLogin;
 
+use Filament\Actions\Action;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
@@ -28,7 +29,17 @@ class NordlySsoPlugin implements Plugin
         if ($panel->getId() === 'app') {
             $panel->login(SsoLogin::class)
                   ->colors(['primary' => Color::hex('#2d5f3f')])
-                  ->brandLogoHeight('2.25rem');
+                  ->brandLogoHeight('2.25rem')
+                  ->userMenuItems([
+                      Action::make('billing')
+                          ->label('Billing')
+                          ->url('https://billing.nordly.gg')
+                          ->icon('tabler-credit-card'),
+                      Action::make('nordly_home')
+                          ->label('nordly.gg')
+                          ->url('https://nordly.gg')
+                          ->icon('tabler-home'),
+                  ]);
 
             // Pelican's FilamentServiceProvider registers primary=Color::Blue globally.
             // Inject CSS custom property overrides after Filament's styles so the
