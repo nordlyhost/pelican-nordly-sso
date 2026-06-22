@@ -4,6 +4,7 @@ namespace Nordly\SsoLogin;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Support\Colors\Color;
 use Nordly\SsoLogin\Filament\Pages\Auth\SsoLogin;
 
 /**
@@ -23,7 +24,8 @@ class NordlySsoPlugin implements Plugin
     public function register(Panel $panel): void
     {
         if ($panel->getId() === 'app') {
-            $panel->login(SsoLogin::class);
+            $panel->login(SsoLogin::class)
+                  ->colors(['primary' => Color::hex('#2d5f3f')]);
         }
     }
 
