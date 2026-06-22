@@ -34,17 +34,24 @@ class NordlySsoPlugin implements Plugin
             // Nordly green always wins regardless of color-manager registration order.
             FilamentView::registerRenderHook(
                 PanelsRenderHook::STYLES_AFTER,
-                fn (): string => $this->primaryColorCss(),
+                fn (): string => $this->brandingCss(),
+            );
+
+            // Replace Pelican footer copyright with Nordly's.
+            FilamentView::registerRenderHook(
+                'pelican::footer.start',
+                fn (): string => '<span class="font-semibold">&copy; ' . date('Y') . ' Nordly. All rights reserved.</span>',
             );
         }
     }
 
     public function boot(Panel $panel): void {}
 
-    private function primaryColorCss(): string
+    private function brandingCss(): string
     {
         // oklch palette generated from #2d5f3f (Nordly boreal green)
-        return '<style>:root{' .
+        return '<style>' .
+            ':root{' .
             '--primary-50:oklch(0.97717647058824 0.01395454545455 153.835);' .
             '--primary-100:oklch(0.95035294117647 0.03272727272727 153.835);' .
             '--primary-200:oklch(0.90547058823529 0.06318181818182 153.835);' .
@@ -56,6 +63,9 @@ class NordlySsoPlugin implements Plugin
             '--primary-800:oklch(0.44611764705882 0.12331818181818 153.835);' .
             '--primary-900:oklch(0.39458823529412 0.09963636363636 153.835);' .
             '--primary-950:oklch(0.27788235294118 0.07136363636364 153.835);' .
-            '}</style>';
+            '}' .
+            // Hide the default Pelican footer copyright link
+            'footer a[href*="pelican.dev"]{display:none}' .
+            '</style>';
     }
 }
