@@ -27,7 +27,8 @@ class NordlySsoPlugin implements Plugin
     {
         if ($panel->getId() === 'app') {
             $panel->login(SsoLogin::class)
-                  ->colors(['primary' => Color::hex('#2d5f3f')]);
+                  ->colors(['primary' => Color::hex('#2d5f3f')])
+                  ->brandLogoHeight('2.25rem');
 
             // Pelican's FilamentServiceProvider registers primary=Color::Blue globally.
             // Inject CSS custom property overrides after Filament's styles so the
@@ -66,6 +67,9 @@ class NordlySsoPlugin implements Plugin
             '}' .
             // Hide the default Pelican footer copyright link
             'footer a[href*="pelican.dev"]{display:none}' .
+            // Subtle top glow matching the marketing site
+            'body::before{content:"";position:fixed;top:0;left:0;right:0;height:400px;pointer-events:none;' .
+            'background:radial-gradient(60% 100% at 50% 0%,color-mix(in srgb,#2d5f3f 25%,transparent) 0%,transparent 100%);z-index:0}' .
             '</style>';
     }
 }
